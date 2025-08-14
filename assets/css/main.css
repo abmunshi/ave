@@ -128,6 +128,18 @@ a {
 }
 .header-area {
   padding: 24px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  transition: box-shadow, padding 0.2s;
+}
+.header-area.sticky {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 0px 0px;
+  padding: 15px 0;
+}
+.logo a img {
+  display: block;
 }
 .main-menu li a {
   padding: 9px 15px;
@@ -370,10 +382,10 @@ a {
   font-weight: bold;
 }
 .faq-trigger:not(.active) .faq-icon::before {
-  content: "+";
+  content: "\002B";
 }
 .faq-trigger.active .faq-icon::before {
-  content: "-";
+  content: "\2212";
 }
 .faq-trigger.active {
   color: #3b82f6;
@@ -392,19 +404,24 @@ a {
   outline: none;
   font-size: 18px;
   font-weight: 500;
-  padding: 18px 20px;
-  margin-bottom: 8px;
+  padding: 20px 20px;
   border-radius: 12px;
   cursor: pointer;
-  transition: background 0.2s;
-}
-.faq-trigger.active,
-.faq-trigger:hover {
-  background: #e5e7eb;
+  transition: background-color 0.2s;
 }
 .faq-content-item p {
   margin: 0;
   padding: 18px 24px;
+  padding-top: 0;
+  color: #636161;
+}
+[data-accordion] .accordion-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.accordion-item {
+  background-color: #fcfcfc;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 /* faq-css end */
 
@@ -483,4 +500,71 @@ a {
   opacity: 1;
   background-position: right 50% bottom 0;
   transition-delay: 0ms;
+}
+.mobile-menu-btn {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: none;
+}
+/* Offcanvas overlay */
+.offcanvas-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.offcanvas-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Media Queries */
+
+@media (max-width: 991px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    grid-gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  .offcanvas-menu {
+    position: fixed;
+    width: 270px;
+    background-color: #fff;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: 90;
+    transition: transform 0.3s;
+    transform: translateX(100%);
+  }
+  .offcanvas-menu.open {
+    transform: translateX(0);
+  }
+
+  .offcanvas-menu.open .main-menu {
+    display: block;
+  }
+  .offcanvas-menu.open {
+    padding: 20px;
+  }
+  .footer-content {
+    padding: 30px 16px;
+    grid-gap: 30px;
+  }
+  .footer-area {
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
 }

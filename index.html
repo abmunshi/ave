@@ -8,15 +8,32 @@
   </head>
   <body>
     <!-- Header Markup Start -->
-    <header class="header-area">
+    <header class="header-area" id="mainHeader">
       <div class="container">
         <div class="header-content flex items-center justify-between">
-          <div class="logo">
+          <div class="logo inline-flex items-center">
             <a href="#" class="inline-block"
               ><img class="max-w-full" src="./assets/images/logo.svg" alt=""
             /></a>
           </div>
-          <nav>
+          <button class="mobile-menu-btn" aria-expanded="false">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+          <div class="offcanvas-overlay"></div>
+          <nav class="offcanvas-menu">
             <ul class="main-menu flex items-center">
               <li><a href="#">Products</a></li>
               <li><a href="#">Resource</a></li>
@@ -47,7 +64,7 @@
     <div class="hero-area">
       <div class="container">
         <div class="hero-content">
-          <a href="#" class="cs-btn style-1"
+          <a href="#" target="_blank" class="cs-btn style-1"
             >Introducing Umbrella, Aave's new Safety Module
             <span class="learn-more"
               >Learn more<svg
@@ -189,7 +206,7 @@
           </div>
           <div class="fq-right-wrapper">
             <div data-accordion>
-              <div>
+              <div class="accordion-item">
                 <button data-accordion-trigger class="faq-trigger">
                   What is Aave?
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -204,7 +221,7 @@
                   </p>
                 </div>
               </div>
-              <div>
+              <div class="accordion-item">
                 <button data-accordion-trigger class="faq-trigger">
                   How do I supply assets?
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -217,7 +234,7 @@
                   </p>
                 </div>
               </div>
-              <div>
+              <div class="accordion-item">
                 <button data-accordion-trigger class="faq-trigger">
                   How do I borrow?
                   <span class="faq-icon" aria-hidden="true"></span>
@@ -331,5 +348,36 @@
     </div>
     <!-- Footer Markup End -->
     <script src="./assets/js/accordion.js"></script>
+    <script>
+      // Sticky header scroll effect
+      window.addEventListener("scroll", function () {
+        var header = document.getElementById("mainHeader");
+        if (window.scrollY > 10) {
+          header.classList.add("sticky");
+        } else {
+          header.classList.remove("sticky");
+        }
+      });
+
+      // Mobile menu toggle with single overlay
+      document.addEventListener("DOMContentLoaded", function () {
+        var menuBtn = document.querySelector(".mobile-menu-btn");
+        var offcanvas = document.querySelector(".offcanvas-menu");
+        var overlay = document.querySelector(".offcanvas-overlay");
+        function closeMenu() {
+          offcanvas.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+          overlay.classList.remove("open");
+        }
+        if (menuBtn && offcanvas && overlay) {
+          menuBtn.addEventListener("click", function () {
+            var isOpen = offcanvas.classList.toggle("open");
+            menuBtn.setAttribute("aria-expanded", isOpen);
+            overlay.classList.toggle("open", isOpen);
+          });
+          overlay.addEventListener("click", closeMenu);
+        }
+      });
+    </script>
   </body>
 </html>
