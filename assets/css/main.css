@@ -687,6 +687,68 @@ blockquote h5 {
 }
 /* Case Study Page Css End */
 
+/* privacy-policy Page Css Start */
+.outer-blog-blk p .medium {
+  font-weight: 500;
+}
+.privacy-pge .outer-blog-blk a {
+  display: inline-block;
+  color: #008aff;
+  text-decoration: underline;
+}
+.tbl {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1px 1px 1.5rem;
+  --border-color: #e3e3e3;
+}
+.tbl table {
+  border-radius: 2px;
+  overflow: hidden;
+  display: table;
+  margin: 0 auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 1px #e3e3e3;
+}
+.tbl table thead {
+  text-align: left;
+  color: #111;
+  background: #fbfbfb;
+}
+.tbl table thead tr th {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+  box-shadow: inset -1px 0 0 0 #e3e3e3;
+}
+.tbl table thead tr th:last-child {
+  box-shadow: none;
+}
+.tbl table tbody tr td {
+  padding: 0.5rem 1rem;
+  color: #111;
+  font-size: 0.875rem;
+  font-weight: 460;
+  line-height: 1.25rem;
+  letter-spacing: -0.00563rem;
+  box-shadow: inset -1px 0 0 0 #e3e3e3;
+}
+.tbl table tbody tr {
+  box-shadow: 0 -1px 0 0 #e3e3e3;
+}
+.tbl table tbody tr td:last-child {
+  box-shadow: none;
+}
+/* privacy-policy Page Css End */
+
 /* Media Queries */
 
 @media (max-width: 991px) {
