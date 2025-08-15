@@ -118,4 +118,67 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
+
+  // Coin select modal logic
+  const coinModal = document.getElementById("coinModal");
+  const coinList = coinModal?.querySelector(".coin-list");
+  const coinModalClose = coinModal?.querySelector(".coin-modal-close");
+  let currentSelectTrigger = null;
+
+  // Open modal on select-trigger click
+  document.querySelectorAll(".select-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentSelectTrigger = trigger;
+      coinModal.classList.add("open");
+    });
+  });
+
+  // Select coin from modal
+  coinList?.addEventListener("click", (e) => {
+    const li = e.target.closest("li[data-coin]");
+    if (li && currentSelectTrigger) {
+      const coin = JSON.parse(li.getAttribute("data-coin"));
+      // Update trigger UI
+      const img = currentSelectTrigger.querySelector("img");
+      const value = currentSelectTrigger.querySelector(".value");
+      if (img) img.src = coin.logo;
+      if (img) img.alt = coin.name;
+      if (value) value.textContent = coin.short;
+      coinModal.classList.remove("open");
+      currentSelectTrigger = null;
+    }
+  });
+
+  // Allow only numbers and decimals in swap input
+  document.querySelectorAll(".swap-blk .input").forEach((input) => {
+    input.addEventListener("input", function () {
+      // Remove any character that is not a digit or decimal point
+      this.value = this.value.replace(/[^0-9.]/g, "");
+      // Prevent more than one decimal point
+      if ((this.value.match(/\./g) || []).length > 1) {
+        this.value = this.value.replace(/\.+$/, "");
+      }
+    });
+  });
+
+  // Close modal on backdrop click or outside
+  coinModal
+    ?.querySelector(".coin-modal-backdrop")
+    .addEventListener("click", () => {
+      coinModal.classList.remove("open");
+      currentSelectTrigger = null;
+    });
+  coinModalClose?.addEventListener("click", () => {
+    coinModal.classList.remove("open");
+    currentSelectTrigger = null;
+  });
+
+  // Optional: Close modal on ESC key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && coinModal?.style.display === "flex") {
+      coinModal.classList.remove("open");
+      currentSelectTrigger = null;
+    }
+  });
 });
