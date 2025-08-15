@@ -28,4 +28,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     overlay.addEventListener("click", closeMenu);
   }
+
+  // FAQ Nav Scroll & Active Link
+  const navLinks = document.querySelectorAll(".faq-nav a");
+  const sections = Array.from(
+    document.querySelectorAll(".faq-type [data-type]")
+  ).map((h2) => h2.parentElement);
+
+  // Scroll to section on click
+  navLinks.forEach((link, idx) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const section = sections[idx];
+      if (section) {
+        const y = section.getBoundingClientRect().top + window.scrollY - 110; // Offset for sticky header
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    });
+  });
+
+  // Highlight active link on scroll
+  function onScroll() {
+    let scrollPos = window.scrollY + 130; // Offset for sticky header
+    let activeIdx = 0;
+    sections.forEach((section, idx) => {
+      if (section.offsetTop <= scrollPos) {
+        activeIdx = idx;
+      }
+    });
+    navLinks.forEach((link, idx) => {
+      link.classList.toggle("active", idx === activeIdx);
+    });
+  }
+
+  if (navLinks.length && sections.length) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
 });
