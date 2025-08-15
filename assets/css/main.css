@@ -1264,4 +1264,21 @@ input[type="number"] {
     padding-top: 35px;
     padding-bottom: 30px;
   }
+
+  .offcanvas-menu .main-menu li a {
+    padding: 0;
+    padding-right: 0;
+    line-height: 1.5;
+    background-color: transparent;
+    color: #221d1d;
+  }
+  .offcanvas-menu .main-menu li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  .offcanvas-menu .main-menu li a:hover {
+    background-color: transparent;
+  }
+  .offcanvas-menu .main-menu li:last-child {
+    display: none;
+  }
 }
